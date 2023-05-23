@@ -4,8 +4,8 @@
 如果树莓派上没有无线功能，那就只能成为有线路由器了。（可用做旁路由，此时需要在主路由上把树莓派openwrt容器的ip地址固定下来并将网关地址指向此openwrt容器的ip地址）  
 本项目中包含了一个树莓派zero w的openwrt的docker image.因为树莓派zero w没有有线网卡接口，所以需要自己购买一个带有线网口的扩展板  
 
-## 1. 刷入树莓派操作系统固件，**注意不要打开Wifi**。 
-## 2. 插入网线，加电启动树莓派，更新系统。 
+## 1. 再microSD卡中刷入树莓派操作系统固件。$\color{red}{刷固件时注意不要打开Wifi}   
+## 2. 将microSD插入树莓派，插入网线，加电启动，更新系统。 
 ```Bash
 sudo apt update
 sudo apt upgrade
@@ -18,7 +18,7 @@ sudo apt install squashfs-tools
 ```Bash
 curl -sSL https://get.docker.com | sh
 ```
-## 5. 设置host网络并创建docker里面的macvlan网络(假设有线网络接口为eth0)。**执行一次就够了。**  
+## 5. 设置host网络并创建docker里面的macvlan网络(假设有线网络接口为eth0)。$\color{blue}{执行一次就够了。}  
 ```Bash
 ./setup_openwrt_network.sh eth0
 ```
@@ -27,7 +27,7 @@ curl -sSL https://get.docker.com | sh
 ```Bash
 ./import.sh image/image.raspi.zerow.tar openwrt:raspi-zerow
 ```
-### 或者从openwrt官网下载一个固件文件并导入docker中。**（注意：只支持squashfs格式的固件文件）**  
+### 或者从openwrt官网下载一个固件文件并导入docker中。$\color{red}{（注意：只支持squashfs格式的固件文件）}  
 ```Bash
 ./import_firmware.sh https://downloads.openwrt.org/releases/22.03.5/targets/bcm27xx/bcm2708/openwrt-22.03.5-bcm27xx-bcm2708-rpi-squashfs-factory.img.gz openwrt:raspi-zerow
 ```
@@ -35,7 +35,7 @@ curl -sSL https://get.docker.com | sh
 ```Bash
 ./start.sh -c openwrt:raspi-zerow openwrt
 ```
-## 8. 查找一个名为OpenWrt的AP并连接，密码为12345678，访问(http://192.168.2.1)进入路由器管理界面，默认root密码为12345678    
+## 8. 查找一个名为OpenWrt的AP并连接，密码为12345678，访问[http://192.168.2.1](http://192.168.2.1)进入路由器管理界面，默认root密码为12345678    
 
 ## 9. 停止openwrt容器  
 ```Bash
