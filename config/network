@@ -1,0 +1,20 @@
+
+config interface 'loopback'
+	option device 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config globals 'globals'
+	option ula_prefix 'fd30:9159:e0c0::/48'
+
+
+config interface   'wan'
+    option device   'eth0'
+    option proto    'dhcp'
+
+config interface 'wifi' 
+	option proto 'static' 
+	option ipaddr '192.168.2.1' 
+	option netmask '255.255.255.0'
+
