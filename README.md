@@ -9,46 +9,48 @@
 ```Bash
 sudo apt update
 sudo apt upgrade
-
+  
 #3. 安装squashfs支持工具，在自己创建docker image时候要用到。  
 ```Bash
 sudo apt install squashfs-tools
-
+  
 #4. 安装docker  
 ```Bash
 curl -sSL https://get.docker.com | sh
-
+  
 #5. 设置host网络并创建docker里面的macvlan网络(假设有线网络接口为eth0)。**执行一次就够了。**  
 ```Bash
 ./setup_openwrt_network.sh eth0
-
+  
 #6. 导入image  
 ##如果是树莓派zero w可以用这里提供的image。  
 ```Bash
 ./import.sh image/image.raspi.zerow.tar openwrt:raspi-zerow
-
+  
 ##或者从openwrt官网下载一个固件文件并导入docker中。**（注意：只支持squashfs格式的固件文件）**  
 ```Bash
 ./import_firmware.sh https://downloads.openwrt.org/releases/22.03.5/targets/bcm27xx/bcm2708/openwrt-22.03.5-bcm27xx-bcm2708-rpi-squashfs-factory.img.gz openwrt:raspi-zerow
-
+  
 #7. 第一次运行openwrt容器。  
 ```Bash
 ./start.sh -c openwrt:raspi-zerow openwrt
-
+  
 #8. 查找一个名为OpenWrt的AP并连接，密码为12345678，访问http://192.168.2.1进入路由器管理界面，默认root密码为12345678  
-
+  
 #9. 停止openwrt容器  
 ```Bash
 ./stop.sh openwrt
-
+  
 #10. 其他操作  
 ##启动openwrt容器  
 ```Bash
 ./start.sh openwrt
+  
 ##重启openwrt容器  
 ```Bash
 ./restart.sh openwrt
+  
 ##删除openwrt容器  
 ```Bash
 ./remove.sh openwrt
-
+  
