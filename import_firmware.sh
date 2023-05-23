@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# != 2 ] ; then
-echo "usage: $0 openwrt-imagefile-url image_name"
+echo "usage: $0 openwrt-squashfs-fireware-url image_name"
 exit 1;
 fi
 
