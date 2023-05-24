@@ -6,6 +6,7 @@ if [ $# -lt 1 ] ; then
 fi
 
 wlan="wlan0"
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [ "$1" = "-c" ] ; then
     if [ $# != 3 ] ; then
@@ -22,15 +23,17 @@ if [ "$1" = "-c" ] ; then
         exit 1
     fi
 
-    sudo docker run --name $3 -d --network macnet --privileged $2 /sbin/init
+    sudo docker container create --name $3 --privileged $2 /sbin/init
+    
     echo "setup the network..."
-
-    sudo docker cp ./config/wireless $3:/etc/config/
-    sudo docker cp ./config/dhcp $3:/etc/config/
-    sudo docker cp ./config/network $3:/etc/config/
-    sudo docker cp ./config/firewall $3:/etc/config/
-      
-    ./setup_wifi.sh $wlan $3
+    sudo docker cp $dir/config/wireless $3:/etc/config/
+    sudo docker cp $dir/config/dhcp $3:/etc/config/
+    sudo docker cp $dir/config/network $3:/etc/config/
+    sudo docker cp $dir/config/firewall $3:/etc/config/
+    sudo docker network connect macnet $3
+    
+    sudo docker container start $3
+    $dir/setup_wifi.sh $wlan $3
 else
     if [ $# != 1 ] ; then
         echo -e "Start an exist container.\nUsage: $0 container_name"
@@ -49,6 +52,6 @@ else
     fi
 
     sudo docker container start $1
-    ./setup_wifi.sh $wlan $1
+    $dir/setup_wifi.sh $wlan $1
 fi
 
