@@ -33,6 +33,7 @@ if [ "$1" = "-c" ] ; then
     sudo docker network connect macnet $3
     
     sudo docker container start $3
+    sudo docker container update --restart=always $3
     $dir/setup_wifi.sh $wlan $3
 else
     if [ $# != 1 ] ; then
@@ -52,6 +53,8 @@ else
     fi
 
     sudo docker container start $1
+    sudo docker container update --restart=always $1
+
     $dir/setup_wifi.sh $wlan $1
 fi
 
