@@ -49,6 +49,7 @@ else
     pid=$(sudo docker inspect -f '{{.State.Pid}}' $1)
     if [ $pid -gt 0 ] ; then
         echo "container $1 already running"
+        $dir/setup_wifi.sh $wlan $1
         exit 1;
     fi
 
