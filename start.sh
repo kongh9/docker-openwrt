@@ -30,10 +30,15 @@ if [ "$1" = "-c" ] ; then
     sudo docker cp $dir/config/dhcp $3:/etc/config/
     sudo docker cp $dir/config/network $3:/etc/config/
     sudo docker cp $dir/config/firewall $3:/etc/config/
-    sudo docker network connect macnet $3
-    
+
+    if ! sudo docker network inspect macnet >/dev/null 2>&1; then
+        echo "no macnet found, use bridge newwork"
+        sudo docker network connect bridge $3
+    else
+        sudo docker network connect macnet $3
+    fi
+
     sudo docker container start $3
-    sudo docker container update --restart=always $3
     $dir/setup_wifi.sh $wlan $3
 else
     if [ $# != 1 ] ; then
@@ -54,8 +59,6 @@ else
     fi
 
     sudo docker container start $1
-    sudo docker container update --restart=always $1
-
     $dir/setup_wifi.sh $wlan $1
 fi
 
