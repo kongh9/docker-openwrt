@@ -1,0 +1,15 @@
+[Unit]
+Description=Setup/cleanup network and Start/stop openwrt 
+Requires=network-online.target docker.service
+After=network-online.target docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+StandardOutput=append:/home/pi/docker-openwrt/logs/service.log
+StandardError=append:/home/pi/docker-openwrt/logs/service.log
+ExecStart=-/home/pi/docker-openwrt/service/start.sh 
+ExecStop=/home/pi/docker-openwrt/service/stop.sh
+
+[Install]
+WantedBy=multi-user.target
