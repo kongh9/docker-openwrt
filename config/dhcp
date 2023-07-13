@@ -17,6 +17,8 @@ config dnsmasq
 	option nonwildcard '1'
 	option localservice '1'
 	option ednspacket_max '1232'
+	list server 8.8.8.8
+        list server 114.114.114.114
 
 config dhcp 'lan'
 	option interface 'lan'

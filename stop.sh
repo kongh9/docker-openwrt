@@ -9,6 +9,6 @@ if ! sudo docker inspect $1 >/dev/null 2>&1; then
     echo "container $1 not found."
     exit 1
 fi
+sudo docker network disconnect bridge $1
 
 sudo docker container stop $1
-sudo rm -rf /var/run/netns/$1

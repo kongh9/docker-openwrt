@@ -11,7 +11,11 @@ config globals 'globals'
 
 config interface   'wan'
     option device   'eth0'
-    option proto    'dhcp'
+    option proto    'static'
+    option 'ipaddr'   "172.17.0.2"
+    option 'gateway'  "172.17.0.1"
+    option 'netmask'  "255.255.0.0"
+
 
 config interface 'wifi' 
 	option proto 'static' 
