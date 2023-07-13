@@ -25,11 +25,7 @@ git clone https://github.com/kongh9/docker-openwrt.git
 cd docker-openwrt
 ```
 
-## 6. 设置host网络并创建docker里面的macvlan网络(假设有线网络接口为eth0)。**执行一次就够了。**  
-```Bash
-./setup_openwrt_network.sh eth0
-```
-## 7. 导入image  
+## 6. 导入image  
 ### 如果是树莓派zero w可以用这里提供的image。  
 ```Bash
 ./import.sh image/image.raspi.zerow.tar openwrt:raspi-zerow
@@ -38,19 +34,18 @@ cd docker-openwrt
 ```Bash
 ./import_firmware.sh https://downloads.openwrt.org/releases/22.03.5/targets/bcm27xx/bcm2708/openwrt-22.03.5-bcm27xx-bcm2708-rpi-squashfs-factory.img.gz openwrt:raspi-zerow
 ```
-## 8. 第一次运行openwrt容器。  
+## 7. 第一次运行openwrt容器。  
 ```Bash
 ./start.sh -c openwrt:raspi-zerow openwrt
 ```
-## 9. 查找一个名为OpenWrt的AP并连接，密码为12345678，访问[http://192.168.2.1](http://192.168.2.1)进入路由器管理界面，默认root密码为12345678    
+## 8. 查找一个名为OpenWrt的AP并连接，密码为12345678，访问[http://192.168.2.1](http://192.168.2.1)进入路由器管理界面，默认root密码为12345678    
 
-## 10. 停止openwrt容器  
+## 9. 停止openwrt容器  
 ```Bash
 ./stop.sh openwrt
 ```
-因为在start.sh中设置了容器的重启策略为--restart==always，所以即使执行了stop.sh，容器也会自动重启。  
 
-## 11. 其他操作  
+## 10. 其他操作  
 ### 启动openwrt容器  
 ```Bash
 ./start.sh openwrt
