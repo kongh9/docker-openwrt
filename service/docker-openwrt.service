@@ -8,7 +8,7 @@ Type=oneshot
 RemainAfterExit=yes
 StandardOutput=append:/home/pi/docker-openwrt/logs/service.log
 StandardError=append:/home/pi/docker-openwrt/logs/service.log
-ExecStart=-/home/pi/docker-openwrt/service/start.sh 
+ExecStart=-/home/pi/docker-openwrt/start.sh openwrt 
 ExecStop=/home/pi/docker-openwrt/service/stop.sh
 
 [Install]

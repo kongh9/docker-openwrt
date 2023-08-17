@@ -18,8 +18,8 @@ _start_container() {
         sudo docker container start $1
     fi
 
-    sudo docker network connect bridge $1
-    sudo docker container update --restart=unless-stopped $1
+##    sudo docker network connect bridge $1
+##    sudo docker container update --restart=unless-stopped $1
     $dir/setup_wifi.sh $wlan $1
 }
 
@@ -39,7 +39,7 @@ if [ "$1" = "-c" ] ; then
         exit 1
     fi
 
-    sudo docker container create --name $3 --cap-add NET_ADMIN --cap-add NET_RAW --privileged $2 /sbin/init
+    sudo docker container create --name $3 --network=bridge --restart=unless-stopped  --cap-add NET_ADMIN --cap-add NET_RAW --privileged $2 /sbin/init
     
     echo "setup the network..."
     sudo docker cp $dir/config/wireless $3:/etc/config/
